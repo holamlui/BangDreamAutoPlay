@@ -1,0 +1,13 @@
+[SOURCE]
+1\SOURCEFILE=D:/Leo/Documents/xspworkspace/BangDream/xsp/src/main.lua
+size=1
+
+[UI]
+1\UIFILE=D:/Leo/Documents/xspworkspace/BangDream/xsp/ui/ui.json
+size=1
+
+[RES]
+size=0
+
+[LIB]
+size=0
