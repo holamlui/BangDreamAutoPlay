@@ -1,6 +1,7 @@
 init("0",1);
-currentPage ="";
-songSelect ="random";
+currentPage = "";
+songSelect = "default";
+gamePlayed= 0;
 function tap(x,y)
 	touchDown(1,x,y);
 	mSleep(20);
@@ -17,7 +18,8 @@ function checkTitle()
 end
 function checkMusicRoomButton()
 	x, y = findColor({1105, 544, 1255, 693}, 
-		"0|0|0xfa9ebb,0|52|0xf4125d,4|59|0xf51f65,45|52|0xfccfde",95, 0, 0, 0)
+		"0|0|0xfa9ebb,0|52|0xf4125d,4|59|0xf51f65,45|52|0xfccfde",
+		90, 0, 0, 0)
 	if x>-1 then
 		return true;
 	else
@@ -49,9 +51,9 @@ function checkBottomRightRedButton()
 		"0|0|0xe90079,44|-20|0xffe1eb,50|-1|0xffb5ce,54|28|0xff4c89",
 		95, 0, 0, 0)
 	if x > -1 then
-		sysLog("Red Button Detected on Coordinate:"..x..","..y);
+		--sysLog("Red Button Detected on Coordinate:"..x..","..y);
 		mSleep(1000);
-		tap(x+150,y);
+		tap(1000,y);
 		return true;
 	else
 		return false;
@@ -60,9 +62,9 @@ end
 function checkCenterBlueButton()
 	--Include Cancel Room and Continue Private Room Panel
 	x, y = findColor({341, 304, 939, 596}, 
-	"0|0|0x0089e9,17|-20|0xe1f5ff,19|-6|0xb7e7ff,19|18|0x43bfff",
-	95, 0, 0, 0)
-	sysLog("Result of Blue Button: "..x..","..y);
+		"0|0|0x0089e9,17|-20|0xe1f5ff,19|-6|0xb7e7ff,19|18|0x43bfff",
+		95, 0, 0, 0)
+	--sysLog("Result of Blue Button: "..x..","..y);
 	if x > -1 then
 		return true;
 	else
@@ -71,8 +73,8 @@ function checkCenterBlueButton()
 end
 function checkHealthBar()
 	x, y = findColor({939, 20, 1194, 61}, 
-	"0|0|0x6eff69,1|14|0x49aa46,32|5|0x6eff69,34|13|0x49aa46",
-	95, 0, 0, 0)
+		"0|0|0x6eff69,1|14|0x49aa46,32|5|0x6eff69,34|13|0x49aa46",
+		95, 0, 0, 0)
 	if x > -1 then
 		return true;
 	else
@@ -90,9 +92,9 @@ function checkCenterOkButton()--For Event Rewards or disconnect Error
 	end
 end
 function checkErrorButton()--For disconnect Error
-	x, y = findColor({363, 145, 916, 576}, 
-		"0|0|0xffbb44,28|-3|0x4c4c4c,83|2|0x4e4e4e,256|24|0xff3b72,248|132|0xffffff,249|206|0x4e4e4e,253|325|0xa0a0a0,244|356|0xfefefe,253|355|0x505050",
-		95, 0, 0, 0)
+	x, y = findColor({326, 125, 951, 595}, 
+	"0|0|0xa0a0a0,55|-22|0xffffff,48|22|0xdedede,95|-4|0x545454,113|-4|0x505050,124|-4|0x505050,136|-13|0x545454,138|8|0x505050,206|-10|0xffffff,219|15|0xdedede",
+	95, 0, 0, 0)
 	if x > -1 then
 		mSleep(1000);
 		tap(630,520);
@@ -118,16 +120,17 @@ function checkCloseButton()
 	x, y = findColor({503,591, 767, 683}, 
 		"0|0|0xa0a0a0,39|2|0xffffff,71|5|0x505050,109|-3|0x515151",95, 0, 0, 0)
 	if x>-1 then
+		mSleep(500);
 		tap(640,650); --Tap close
 		sysLog("Close Notification");
 	end
 end
 while true do
 	mSleep(1000);
-	sysLog("Main Loop, current Page = "..currentPage);
+	--sysLog("Main Loop, current Page = "..currentPage);
 	-- Just opened the app--
 	if currentPage=="" then
-		if checkTitle() then
+		if checkTitle()==true then
 			tap(630,630);
 			sysLog("tapped <tap to start>");
 			currentPage="main";
@@ -137,12 +140,12 @@ while true do
 	end
 	-- Main Page --
 	if currentPage=="main" then
-		sysLog("Now in Main");
+		--sysLog("Now in Main");
 		checkCloseButton();
-		if checkMusicRoomButton then
+		if checkMusicRoomButton()==true then
 			mSleep(1000);
 			tap(1170,630);
-			sysLog("tapped Music Room Button");
+			--sysLog("tapped Music Room Button");
 			currentPage="musicRoom";
 			mSleep(1000);
 		end
@@ -151,32 +154,33 @@ while true do
 		if checkMultiLiveButton()==true then
 			mSleep(1500);
 			tap(900,500);
-			mSleep(1000);
-			sysLog("tapped MultiLive Button");
+			mSleep(500);
+			--sysLog("tapped MultiLive Button");
 			currentPage="multiLive";
 		end
 	end
 	if currentPage=="multiLive" then
 		if checkMultiLiveButton()==true then --check again
-			mSleep(1500);
+			mSleep(500);
 			tap(900,500);
-			mSleep(1000);
-			sysLog("tapped MultiLive Button");
+			mSleep(500);
+			--sysLog("tapped MultiLive Button");
 			currentPage="multiLive";
 		end
 		if checkBottomRightRedButton()==true then
 			--mSleep(1000);
 			--tap(1000,640);
 			--mSleep(1000);
-			sysLog("tapped OK Button");
+			--sysLog("tapped OK Button");
 			currentPage="loading";
 		end
+		checkErrorButton();
 	end
 	if currentPage=="loading" then
 		if checkCenterBlueButton()==true then
-			sysLog("blue button Detected, entering Room now");
+			--sysLog("blue button Detected, entering Room now");
 		elseif checkCenterBlueButton()==false then
-			sysLog("Room loaded, wait 2s and go to selectSong");
+			--sysLog("Room loaded, wait 2s and go to selectSong");
 			mSleep(2000);
 			currentPage="selectSong"
 		end
@@ -184,7 +188,7 @@ while true do
 	if currentPage=="selectSong" then
 		-- Check Disconnected function is currently buggy, need to improve accuracy
 		checkErrorButton(); --Disconnected
-
+		
 		--checkBottomRightRedButton();
 		if checkConfirmButton()==true then
 			if songSelect=="random" then
@@ -193,11 +197,14 @@ while true do
 				sysLog("Random Song");
 				mSleep(2000);
 				currentPage = "readyToStart";
+				songSelect="default";
 			elseif songSelect=="default" then
 				mSleep(1000);
 				sysLog("Default Song");
 				tap(1000,630);
+				mSleep(2000);
 				currentPage = "readyToStart";
+				songSelect="random";
 			end
 		end
 	end
@@ -209,23 +216,30 @@ while true do
 		end
 	end
 	if currentPage=="playing" then
-		checkErrorButton();
-		sysLog("The script will now wait 90s");
-		mSleep(90000);-- wait~90s
-		while checkHealthBar()==true do
-		sysLog("playing - HealthBar still here...");
-		mSleep(3000);
-		checkErrorButton();
+		sysLog("Start Game "..gamePlayed+1);
+		while checkHealthBar()==false do --loading, no HealthBar
+			mSleep(5000);
+			--sysLog("Loading . . .");
+			if checkErrorButton()==true then
+				break;
+			end
 		end
-		if checkHealthBar()==false then
-			sysLog("No more HealthBar");
+		while checkHealthBar()==true do
+			--sysLog("playing - HealthBar still here...");
+			mSleep(3000);
+			checkErrorButton();
+		end
+		if checkHealthBar()==false and currentPage=="playing" then
+			--sysLog("No more HealthBar");
 			while checkMusicRoomButton()==false do
-				tap(650,300);
+				tap(630,530);
 				mSleep(100);
-				tap(650,300);
+				tap(630,530);
 				mSleep(100);
 				checkBottomRightRedButton();
 			end
+			gamePlayed=gamePlayed+1;
+			sysLog("Finish Game "..gamePlayed);
 			if checkMusicRoomButton()==true then
 				currentPage="main";
 			end
