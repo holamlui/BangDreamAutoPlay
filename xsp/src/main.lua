@@ -8,7 +8,9 @@ function tap(x,y)
 	touchUp(1,x,y);
 end
 function checkTitle()
-	x,y = findColor({513, 619, 765, 655}, "0|0|0xfd5a85",95, 0, 0, 0);
+	x, y = findColor({1175, 610, 1274, 709}, 
+"0|0|0xfefdfe,-6|-8|0xff3b72,9|-8|0xff3b72,-7|9|0xff3b72,7|7|0xff3b72,-36|5|0xa0a0a0,0|-28|0xa0a0a0,36|3|0xa0a0a0,1|44|0xa0a0a0",
+95, 0, 0, 0);
 	if x>-1 then
 		currentPage="title";
 		return true;
