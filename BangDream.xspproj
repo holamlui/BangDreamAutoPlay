@@ -1,6 +1,7 @@
 [SOURCE]
 1\SOURCEFILE=D:/Leo/Documents/xspworkspace/BangDream/xsp/src/main.lua
-size=1
+size=2
+2\SOURCEFILE=D:/Leo/Documents/xspworkspace/BangDream/xsp/src/function.lua
 
 [UI]
 1\UIFILE=D:/Leo/Documents/xspworkspace/BangDream/xsp/ui/ui.json
