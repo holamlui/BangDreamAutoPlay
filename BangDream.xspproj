@@ -1,7 +1,9 @@
 [SOURCE]
-1\SOURCEFILE=D:/Leo/Documents/xspworkspace/BangDream/xsp/src/main.lua
-size=2
-2\SOURCEFILE=D:/Leo/Documents/xspworkspace/BangDream/xsp/src/function.lua
+1\SOURCEFILE=D:/Leo/Documents/xspworkspace/BangDream/xsp/src/function.lua
+size=4
+2\SOURCEFILE=D:/Leo/Documents/xspworkspace/BangDream/xsp/src/main.lua
+3\SOURCEFILE=D:/Leo/Documents/xspworkspace/BangDream/xsp/src/event.lua
+4\SOURCEFILE=D:/Leo/Documents/xspworkspace/BangDream/xsp/src/main(backup).lua
 
 [UI]
 1\UIFILE=D:/Leo/Documents/xspworkspace/BangDream/xsp/ui/ui.json
