@@ -39,8 +39,8 @@ function bandBattle()
 			if checkBandBattleButton()==true then --check again
 				mSleep(500);
 			end
-			if checkBottomRightRedButton()==true then
-				--mSleep(1000);
+			while checkBottomRightRedButton()==true do
+				mSleep(100);
 				--tap(1000,640);
 				--mSleep(1000);
 				--sysLog("tapped OK Button");
@@ -64,19 +64,16 @@ function bandBattle()
 				currentPage = "";
 			end
 			--checkBottomRightRedButton();
-			if checkConfirmButton()==true then
+			while checkConfirmButton()==true do
+				mSleep(100);
 				if songSelect=="random" then
-					mSleep(1000);
 					tap(760,630);
 					sysLog("Random Song");
-					mSleep(2000);
 					currentPage = "readyToStart";
 					--songSelect="default";
 				elseif songSelect=="default" then
-					mSleep(1000);
 					sysLog("Default Song");
 					tap(1000,630);
-					mSleep(2000);
 					currentPage = "readyToStart";
 					--songSelect="random";
 				end
@@ -88,12 +85,14 @@ function bandBattle()
 			end
 			if checkErrorButton()==true then
 				sysLog("Error in ready to start");
-			elseif checkBottomRightRedButton()==true then
-				currentPage="playing";
+			else
+				while checkBottomRightRedButton()==true do
+					mSleep(100);
+					currentPage="playing";
+				end
 			end
 		end
 		if currentPage=="playing" then
-			checkBottomRightRedButton();
 			sysLog("Start Game "..gamePlayed+1);
 			while checkHealthBar()==false do --loading, no HealthBar
 				mSleep(5000);
