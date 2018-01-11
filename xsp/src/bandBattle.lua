@@ -1,7 +1,10 @@
 require "function";
+timeCount = 0;
+timeOut = 60;
 function bandBattle()
 	while true do
 		mSleep(1000);
+		timeCount = timeCount+1;
 		--sysLog("Main Loop, current Page = "..currentPage);
 		-- Just opened the app--
 		if currentPage=="" then
@@ -9,11 +12,15 @@ function bandBattle()
 				tap(630,630);
 				sysLog("tapped <tap to start>");
 				currentPage="main";
+				timeCount = 0;
 			elseif checkMusicRoomButton()==true then
 				currentPage="main";
+				timeCount = 0;
 			elseif checkBandBattleButton()==true then
 				currentPage="bandBattle";
+				timeCount = 0;
 			end
+			reloadOnTimeOut(timeCount,timeOut);
 		end
 		-- Main Page --
 		if currentPage=="main" then
@@ -23,7 +30,9 @@ function bandBattle()
 				tap(1170,630);
 				--sysLog("tapped Music Room Button");
 				currentPage="musicRoom";
+				timeCount = 0;
 			end
+			reloadOnTimeOut(timeCount,timeOut);
 		end
 		if currentPage=="musicRoom" then
 			if checkMusicRoomButton()==true then --check again
@@ -33,7 +42,9 @@ function bandBattle()
 				mSleep(500);
 				--sysLog("tapped MultiLive Button");
 				currentPage="bandBattle";
+				timeCount = 0;
 			end
+			reloadOnTimeOut(timeCount,timeOut);
 		end
 		if currentPage=="bandBattle" then
 			if checkBandBattleButton()==true then --check again
@@ -45,8 +56,10 @@ function bandBattle()
 				--mSleep(1000);
 				--sysLog("tapped OK Button");
 				currentPage="loading";
+				timeCount = 0;
 			end
 			checkErrorButton();
+			reloadOnTimeOut(timeCount,timeOut);
 		end
 		if currentPage=="loading" then
 			if checkCenterBlueButton()==true then
@@ -55,7 +68,9 @@ function bandBattle()
 				--sysLog("Room loaded, wait 2s and go to selectSong");
 				mSleep(2000);
 				currentPage="selectSong"
+				timeCount = 0;
 			end
+			reloadOnTimeOut(timeCount,timeOut);
 		end
 		if currentPage=="selectSong" then
 			-- Check Disconnected function is currently buggy, need to improve accuracy
@@ -70,14 +85,17 @@ function bandBattle()
 					tap(760,630);
 					sysLog("Random Song");
 					currentPage = "readyToStart";
+					timeCount = 0;
 					--songSelect="default";
 				elseif songSelect=="default" then
 					sysLog("Default Song");
 					tap(1000,630);
 					currentPage = "readyToStart";
+					timeCount = 0;
 					--songSelect="random";
 				end
 			end
+			reloadOnTimeOut(timeCount,timeOut);
 		end
 		if currentPage=="readyToStart" then
 			if checkConnectionFail() == true then
@@ -86,25 +104,31 @@ function bandBattle()
 			if checkErrorButton()==true then
 				sysLog("Error in ready to start");
 			else
-				while checkBottomRightRedButton()==true do
+				while checkBottomRightRedButton()==true and checkConfirmButton()==false do
 					mSleep(100);
 					currentPage="playing";
+					timeCount = 0;
 				end
 			end
+			reloadOnTimeOut(timeCount,timeOut);
 		end
 		if currentPage=="playing" then
 			sysLog("Start Game "..gamePlayed+1);
 			while checkHealthBar()==false do --loading, no HealthBar
-				mSleep(5000);
+				timeCount = timeCount+1;
+				mSleep(5000);				
 				--sysLog("Loading . . .");
 				if checkErrorButton()==true then
 					break;
 				end
+				reloadOnTimeOut(timeCount,60);
 			end
+			timeCount = 0;
 			while checkHealthBar()==true do
 				--sysLog("playing - HealthBar still here...");
 				mSleep(3000);
 				checkErrorButton();
+				reloadOnTimeOut(timeCount,120);
 			end
 			if checkHealthBar()==false and currentPage=="playing" then
 				--sysLog("No more HealthBar");
@@ -112,6 +136,8 @@ function bandBattle()
 					currentPage = "";
 				end
 				while checkMusicRoomButton()==false do
+					timeCount = timeCount + 1;
+					reloadOnTimeOut(timeCount,300);
 					checkCenterOkButton();
 					mSleep(100);
 					tap(630,530);
@@ -120,10 +146,9 @@ function bandBattle()
 				end
 				gamePlayed=gamePlayed+1;
 				sysLog("Finish Game "..gamePlayed);
-				if checkMusicRoomButton()==true then
-					currentPage="main";
-				end
-			end
+				timeCount = 0;
+				currentPage="";
+			end			
 		end
 	end
 end
