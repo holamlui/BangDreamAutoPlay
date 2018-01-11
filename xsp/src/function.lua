@@ -149,7 +149,7 @@ function checkErrorButton()--For disconnect Error
 		tap(630,520);
 		mSleep(1000);
 		sysLog("Disconnected");
-		currentPage="multiLive";
+		currentPage="";
 		return true;
 	else
 		return false;
@@ -163,5 +163,12 @@ function checkCloseButton()
 		mSleep(500);
 		tap(640,650); --Tap close
 		sysLog("Close Notification");
+	end
+end
+function reloadOnTimeOut(timeout,limit)
+	if timeout>=limit then
+		closeApp("jp.co.craftegg.band");
+		sysLog("Restart App and script!");
+		lua_restart();
 	end
 end
