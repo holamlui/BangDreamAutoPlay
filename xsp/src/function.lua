@@ -62,6 +62,18 @@ function checkMusicRoomButton()
 		return false;
 	end
 end
+function checkBandBattleButton()
+	x, y = findColor({898, 358, 1169, 570}, 
+	"0|0|0xd778ff,-111|-53|0xffffff,-93|-11|0xffffff,25|24|0xe6b3fb,57|21|0xe6b3fb,-14|89|0xffffff",
+	95, 0, 0, 0)
+	if x > -1 then
+		tap(x,y)
+		return true;
+	else
+		return false;
+end
+
+end
 function checkMultiLiveButton()
 	x, y = findColor({679, 394, 1144, 554}, 
 		"0|0|0xffffff,196|0|0xff3b72,355|35|0xff9db9",95, 0, 0, 0)
@@ -88,7 +100,7 @@ function checkBottomRightRedButton()
 		95, 0, 0, 0)
 	if x > -1 then
 		--sysLog("Red Button Detected on Coordinate:"..x..","..y);
-		mSleep(1000);
+		--mSleep(500);
 		tap(1000,y);
 		return true;
 	else
@@ -122,6 +134,7 @@ function checkCenterOkButton()--For Event Rewards or disconnect Error
 		"0|0|0xffbb44,46|22|0xff3b72,136|342|0xa0a0a0,231|353|0x505050",
 		100, 0, 0, 0)
 	if x > -1 then
+		tap(x,y);
 		return true;
 	else
 		return false;
@@ -142,16 +155,7 @@ function checkErrorButton()--For disconnect Error
 		return false;
 	end
 end
-function checkRedOkButton() --For Red OK Button in bottom-right
-	x, y = findColor({849, 605, 1174, 680}, 
-		"0|0|0xe90079,29|-21|0xffe1eb,76|-8|0xffb5ce,88|20|0xff4985,131|0|0xf81076,175|2|0xf81076",
-		95, 0, 0, 0)
-	if x>-1 then
-		return true;
-	else
-		return false;
-	end
-end
+
 function checkCloseButton()
 	x, y = findColor({503,591, 767, 683}, 
 		"0|0|0xa0a0a0,39|2|0xffffff,71|5|0x505050,109|-3|0x515151",95, 0, 0, 0)
