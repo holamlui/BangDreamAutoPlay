@@ -3,13 +3,16 @@ function checkConnectionFail()
 	redX,redY = checkRetryButton();
 	if(blueX>-1 and redX>-1) then
 		sysLog("detected connection error");
-		tap(blueX,blueY);
+		tap(redX,redY); --retry first
+		mSleep(500);
+		tap(blueX,blueY); -- cancel if fail
 		sysLog("tapped cancel button");
 		okX,okY = checkOkButton();
 		sleep(1000); --wait 1 second
 		if okX>-1 then
 			tap(okX,okY);
 			sysLog("tapped ok button");
+			currentPage="";
 		end
 		return true;
 	else

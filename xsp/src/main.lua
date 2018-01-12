@@ -1,7 +1,7 @@
 require "function";
 require "event";
 require "bandBattle";
-require "main(backup)";
+require "multiLive";
 appid = frontAppName();
 if appid ~= "jp.co.craftegg.band" then
 r = runApp("jp.co.craftegg.band");

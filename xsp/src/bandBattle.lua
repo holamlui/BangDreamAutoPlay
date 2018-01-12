@@ -116,12 +116,13 @@ function bandBattle()
 			sysLog("Start Game "..gamePlayed+1);
 			while checkHealthBar()==false do --loading, no HealthBar
 				timeCount = timeCount+1;
-				mSleep(5000);				
+				mSleep(5000);		
+				checkConnectionFail();		
 				--sysLog("Loading . . .");
 				if checkErrorButton()==true then
 					break;
 				end
-				reloadOnTimeOut(timeCount,60);
+				reloadOnTimeOut(timeCount,120);
 			end
 			timeCount = 0;
 			while checkHealthBar()==true do
