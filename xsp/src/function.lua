@@ -1,3 +1,11 @@
+function toggleSong(songSelect)
+	if songSelect == "random" then
+	songSelect = "default";
+	elseif songSelect == "default" then
+	songSelect = "random"
+	end
+	return songSelect;
+end
 function checkConnectionFail()
 	blueX,blueY = checkCancelButton();
 	redX,redY = checkRetryButton();
@@ -8,7 +16,7 @@ function checkConnectionFail()
 		tap(blueX,blueY); -- cancel if fail
 		sysLog("tapped cancel button");
 		okX,okY = checkOkButton();
-		sleep(1000); --wait 1 second
+		mSleep(1000); --wait 1 second
 		if okX>-1 then
 			tap(okX,okY);
 			sysLog("tapped ok button");

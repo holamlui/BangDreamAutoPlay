@@ -1,6 +1,7 @@
 require "function";
 timeCount = 0;
 timeOut = 60;
+currentTime = os.date("%H")+0;
 function bandBattle()
 	while true do
 		mSleep(1000);
@@ -116,7 +117,7 @@ function bandBattle()
 			sysLog("Start Game "..gamePlayed+1);
 			while checkHealthBar()==false do --loading, no HealthBar
 				timeCount = timeCount+1;
-				mSleep(5000);		
+				mSleep(500);		
 				checkConnectionFail();		
 				--sysLog("Loading . . .");
 				if checkErrorButton()==true then
@@ -128,6 +129,7 @@ function bandBattle()
 			while checkHealthBar()==true do
 				--sysLog("playing - HealthBar still here...");
 				mSleep(3000);
+				timeCount = timeCount+1;
 				checkErrorButton();
 				reloadOnTimeOut(timeCount,120);
 			end
@@ -147,6 +149,12 @@ function bandBattle()
 				end
 				gamePlayed=gamePlayed+1;
 				sysLog("Finish Game "..gamePlayed);
+				currentTime = os.date("%H")+0
+				if currentTime>=0 and currentTime<=5 then
+					songSelect=toggleSong(songSelect);
+				else
+					songSelect = "default";
+				end
 				timeCount = 0;
 				currentPage="";
 			end			
