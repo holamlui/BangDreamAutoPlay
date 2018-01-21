@@ -89,6 +89,7 @@ function checkMultiLiveButton()
 	x, y = findColor({679, 394, 1144, 554}, 
 		"0|0|0xffffff,196|0|0xff3b72,355|35|0xff9db9",95, 0, 0, 0)
 	if x>-1 then
+		tap(x,y)
 		return true;
 	else
 		return false;

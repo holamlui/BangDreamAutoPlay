@@ -8,8 +8,8 @@ r = runApp("jp.co.craftegg.band");
 end
 init("jp.co.craftegg.band",1);--
 currentPage = "";
-songSelect = "default";
+songSelect = "random";
 gamePlayed= 0;
-bandBattle();
---main();
+--bandBattle();
+main();
 --event(); --for event
