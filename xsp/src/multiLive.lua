@@ -2,7 +2,7 @@ require "function";
 timeCount = 0;
 timeOut = 120;
 currentTime = os.date("%H")+0;
-function main()
+function multiLive()
 	while true do
 		mSleep(1000);
 		timeCount = timeCount+1;
@@ -126,7 +126,7 @@ function main()
 				if checkErrorButton()==true then
 					break;
 				end
-				reloadOnTimeOut(timeCount,120);
+				reloadOnTimeOut(timeCount,180);
 			end
 			timeCount = 0;
 			while checkHealthBar()==true do
@@ -155,9 +155,9 @@ function main()
 				sysLog("Finish Game "..gamePlayed);
 				currentTime = os.date("%H")+0
 				if currentTime>=0 and currentTime<=5 then
-					songSelect=toggleSong(songSelect);
+					--songSelect=toggleSong(songSelect);
 				else
-					songSelect = "random";
+					--songSelect = "random";
 				end
 				timeCount = 0;
 				currentPage="";
