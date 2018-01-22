@@ -142,9 +142,9 @@ function checkHealthBar()
 	end
 end
 function checkCenterOkButton()--For Event Rewards or disconnect Error
-	x, y = findColor({338, 134, 943, 585}, 
-		"0|0|0xffbb44,46|22|0xff3b72,136|342|0xa0a0a0,231|353|0x505050",
-		100, 0, 0, 0)
+	x, y = findColor({250, 60, 1018, 700}, 
+"0|0|0xffffff,-5|-2|0x505050,6|-2|0x505050,-4|-30|0xa0a0a0,-3|23|0xdedede,-97|-12|0xffffff,-95|20|0xdedede,80|-12|0xffffff,80|18|0xdedede",
+95, 0, 0, 0)
 	if x > -1 then
 		tap(x,y);
 		return true;
@@ -169,12 +169,11 @@ function checkErrorButton()--For disconnect Error
 end
 
 function checkCloseButton()
-	x, y = findColor({503,591, 767, 683}, 
-		"0|0|0xa0a0a0,39|2|0xffffff,71|5|0x505050,109|-3|0x515151",95, 0, 0, 0)
+	x, y = findColor({180, 0, 1100, 720}, 
+"0|0|0xfdfdfd,-7|-1|0x515151,35|-3|0x515151,-32|4|0x515151,-97|-15|0xffffff,-94|14|0xdedede,-7|-31|0xa0a0a0,89|-14|0xffffff,93|16|0xdedede",
+95, 0, 0, 0)
 	if x>-1 then
-		mSleep(500);
-		tap(640,650); --Tap close
-		sysLog("Close Notification");
+		tap(x,y);
 	end
 end
 function reloadOnTimeOut(timeout,limit)

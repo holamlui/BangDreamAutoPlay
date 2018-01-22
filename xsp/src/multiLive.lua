@@ -1,6 +1,6 @@
 require "function";
 timeCount = 0;
-timeOut = 60;
+timeOut = 120;
 currentTime = os.date("%H")+0;
 function main()
 	while true do
@@ -147,6 +147,7 @@ function main()
 					checkCenterOkButton();
 					mSleep(100);
 					tap(630,530);
+					checkCloseButton();
 					mSleep(100);
 					checkBottomRightRedButton();
 				end
