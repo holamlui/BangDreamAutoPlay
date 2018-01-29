@@ -134,8 +134,11 @@ end
 function checkHealthBar()
 	x, y = findColor({939, 20, 1194, 61}, 
 		"0|0|0x6eff69,1|14|0x49aa46,32|5|0x6eff69,34|13|0x49aa46",
-		95, 0, 0, 0)
-	if x > -1 then
+		95, 0, 0, 0);
+	x2, y2 = findColor({1170, 3, 1281, 104}, 
+	"0|0|0x818286,-10|0|0x801e39,11|3|0x801e39,1|27|0x6c6c70",
+	95, 0, 0, 0);
+	if x > -1 or x2 > -1 then
 		return true;
 	else
 		return false;
