@@ -1,4 +1,6 @@
 # BangDreamAutoPlay
+The development and maintanence of this project is stopped until further notice, welcome for people who are interested to take up this project
+
 ![](https://img.shields.io/badge/Release-Beta1.0-ff3b72.svg)
 
 | Build status |   Tool   | Modules |
